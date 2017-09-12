@@ -175,7 +175,7 @@ module.exports = Backbone.View.extend({
       body.append(this.getJsContainer());
       em.trigger('loaded');
       this.frame.el.contentWindow.onscroll = this.onFrameScroll;
-      this.frame.udpateOffset();
+      this.frame.updateOffset();
 
       // When the iframe is focused the event dispatcher is not the same so
       // I need to delegate all events to the parent document

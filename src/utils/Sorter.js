@@ -4,7 +4,7 @@ module.exports = Backbone.View.extend({
 
   initialize(opt) {
     this.opt = opt || {};
-    _.bindAll(this,'startSort','onMove','endMove','rollback', 'udpateOffset', 'moveDragHelper');
+    _.bindAll(this,'startSort','onMove','endMove','rollback', 'updateOffset', 'moveDragHelper');
     var o = opt || {};
     this.elT = 0;
     this.elL = 0;
@@ -42,8 +42,8 @@ module.exports = Backbone.View.extend({
     this.selectOnEnd = !o.avoidSelectOnEnd;
 
     if(this.em && this.em.on){
-      this.em.on('change:canvasOffset', this.udpateOffset);
-      this.udpateOffset();
+      this.em.on('change:canvasOffset', this.updateOffset);
+      this.updateOffset();
     }
   },
 
@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
   /**
    * Triggered when the offset of the editro is changed
    */
-  udpateOffset() {
+  updateOffset() {
     var offset = this.em.get('canvasOffset');
     this.offTop = offset.top;
     this.offLeft = offset.left;

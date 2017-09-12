@@ -116,7 +116,7 @@ module.exports = () => {
      * Triggered when the offset of the editor is changed
      * @private
      */
-    udpatePosition() {
+    updatePosition() {
       var u = 'px';
       var canvas = c.em.get('Canvas');
       var pos = canvas.getTargetToElementDim(toolbar.el, this.lastEl, {
@@ -157,12 +157,12 @@ module.exports = () => {
       this.show();
 
       if(c.em) {
-        setTimeout(this.udpatePosition.bind(this), 0);
-        c.em.off('change:canvasOffset', this.udpatePosition, this);
-        c.em.on('change:canvasOffset', this.udpatePosition, this);
+        setTimeout(this.updatePosition.bind(this), 0);
+        c.em.off('change:canvasOffset', this.updatePosition, this);
+        c.em.on('change:canvasOffset', this.updatePosition, this);
         // Update position on scrolling
-        c.em.off('canvasScroll', this.udpatePosition, this);
-        c.em.on('canvasScroll', this.udpatePosition, this);
+        c.em.off('canvasScroll', this.updatePosition, this);
+        c.em.on('canvasScroll', this.updatePosition, this);
       }
 
       //Avoid closing edit mode clicking on toolbar

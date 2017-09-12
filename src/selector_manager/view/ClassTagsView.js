@@ -156,7 +156,7 @@ module.exports = Backbone.View.extend({
   },
 
   /**
-   * Udpate selector helper
+   * Update selector helper
    * @return {this}
    * @private
    */

@@ -10,7 +10,7 @@ module.exports = Backbone.View.extend({
   },
 
   initialize(o) {
-    _.bindAll(this, 'udpateOffset');
+    _.bindAll(this, 'updateOffset');
     this.config = o.config || {};
     this.ppfx = this.config.pStylePrefix || '';
     this.em = this.config.em;
@@ -25,14 +25,14 @@ module.exports = Backbone.View.extend({
   updateWidth(model) {
     var device = this.em.getDeviceModel();
     this.el.style.width = device ? device.get('width') : '';
-    this.udpateOffset();
-    this.$el.on(this.motionsEv, this.udpateOffset);
+    this.updateOffset();
+    this.$el.on(this.motionsEv, this.updateOffset);
   },
 
-  udpateOffset() {
+  updateOffset() {
     var offset = this.em.get('Canvas').getOffset();
     this.em.set('canvasOffset', offset);
-    this.$el.off(this.motionsEv, this.udpateOffset);
+    this.$el.off(this.motionsEv, this.updateOffset);
   },
 
   getBody() {
