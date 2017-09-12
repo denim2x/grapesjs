@@ -4,18 +4,25 @@ var env = process.env.WEBPACK_ENV;
 var name = 'grapes';
 var plugins = [];
 
-if(env !== 'dev') {
+if (env !== 'dev') {
   plugins = [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
-      compressor: {warnings: false},
+      compressor: { warnings: false },
     }),
-    new webpack.BannerPlugin(pkg.name + ' - ' + pkg.version),
+    new webpack.BannerPlugin(`${pkg.name} - ${pkg.version}`),
   ]
 }
 
-plugins.push(new webpack.ProvidePlugin({_: 'underscore'}));
+//plugins.push(new webpack.ProvidePlugin({_: 'underscore'}));
+plugins.push(
+  new webpack.ProvidePlugin({
+    _: 'underscore', s: 'underscore.string',
+    $: 'jquery', jQuery: 'jquery',
+    Hammer: 'hammerjs'
+  })
+);
 
 module.exports = {
   entry: './src',
@@ -23,7 +30,7 @@ module.exports = {
       filename: './dist/' + name + '.min.js',
       library: 'grapesjs',
       libraryTarget: 'umd',
-  },
+  },   /*
   externals: {
     jquery: {
       commonjs2: 'jquery',
@@ -31,7 +38,7 @@ module.exports = {
       amd: 'jquery',
       root: 'jQuery'
     }
-  },
+  },    */
   plugins: plugins,
   module: {
     loaders: [{
@@ -44,4 +51,9 @@ module.exports = {
   resolve: {
     modules: ['src', 'node_modules'],
   },
+  devServer: {
+    port: 80,
+    host: '0.0.0.0',
+    disableHostCheck: true
+  }
 }
