@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 module.exports = Backbone.View.extend({
 
   events: {
-    mousedown: 'startDrag'
+    'mousedown.^left': 'startDrag'
   },
 
   initialize(o, config) {
